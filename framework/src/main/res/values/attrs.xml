@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="AVLoadingIndicatorView">
+        <attr name="indicator">
+            <flag name="BallPulse" value="0"/>
+            <flag name="BallGridPulse" value="1"/>
+            <flag name="BallClipRotate" value="2"/>
+            <flag name="BallClipRotatePulse" value="3"/>
+            <flag name="SquareSpin" value="4"/>
+            <flag name="BallClipRotateMultiple" value="5"/>
+            <flag name="BallPulseRise" value="6"/>
+            <flag name="BallRotate" value="7"/>
+            <flag name="CubeTransition" value="8"/>
+            <flag name="BallZigZag" value="9"/>
+            <flag name="BallZigZagDeflect" value="10"/>
+            <flag name="BallTrianglePath" value="11"/>
+            <flag name="BallScale" value="12"/>
+            <flag name="LineScale" value="13"/>
+            <flag name="LineScaleParty" value="14"/>
+            <flag name="BallScaleMultiple" value="15"/>
+            <flag name="BallPulseSync" value="16"/>
+            <flag name="BallBeat" value="17"/>
+            <flag name="LineScalePulseOut" value="18"/>
+            <flag name="LineScalePulseOutRapid" value="19"/>
+            <flag name="BallScaleRipple" value="20"/>
+            <flag name="BallScaleRippleMultiple" value="21"/>
+            <flag name="BallSpinFadeLoader" value="22"/>
+            <flag name="LineSpinFadeLoader" value="23"/>
+            <flag name="TriangleSkewSpin" value="24"/>
+            <flag name="Pacman" value="25"/>
+            <flag name="BallGridBeat" value="26"/>
+            <flag name="SemiCircleSpin" value="27"/>
+            <flag name="LoaderFace" value="28"/>
+        </attr>
+        <attr name="indicator_color" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="SelectableRoundedImageView">
+        <attr name="sriv_left_top_corner_radius" format="dimension"/>
+        <attr name="sriv_right_top_corner_radius" format="dimension"/>
+        <attr name="sriv_left_bottom_corner_radius" format="dimension"/>
+        <attr name="sriv_right_bottom_corner_radius" format="dimension"/>
+        <attr name="sriv_border_width" format="dimension"/>
+        <attr name="sriv_border_color" format="color"/>
+        <attr name="sriv_oval" format="boolean"/>
+        <attr name="android:scaleType"/>
+    </declare-styleable>
+
+    <declare-styleable name="LoadingView">
+        <attr name="backgroupColor" format="color|reference"/>
+        <attr name="eyeColor" format="color|reference"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="QuickSideBarView">
+        <attr name="sidebarTextColor" format="color|reference"/>
+        <attr name="sidebarBackgroundColor" format="color|reference"/>
+        <attr name="sidebarTextColorChoose" format="color|reference"/>
+        <attr name="sidebarTextSize" format="float"/>
+        <attr name="sidebarTextSizeChoose" format="float"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="AiJiaImageView">
+        <attr name="iv_isCircle" format="boolean"/>
+        <attr name="iv_cornerRadius" format="reference|dimension"/>
+        <attr name="iv_isSquare" format="boolean"/>
+        <attr name="iv_borderWidth" format="reference|dimension"/>
+        <attr name="iv_borderColor" format="reference|color"/>
+    </declare-styleable>
+
+    <declare-styleable name="autoScrollHeight">
+        <attr name="textSize" format="dimension"/>
+        <attr name="padding" format="dimension"/>
+        <attr name="animsDuration" format="integer"/>
+        <attr name="scrollDuration" format="integer"/>
+        <attr name="textColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension"/>
+        <attr name="border_color" format="color"/>
+        <attr name="edge_resId" format="reference"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="RoundImageView">
+        <attr name="round_radius" format="dimension"/>
+        <attr name="round_color" format="color|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="FlowLayout">
+        <!-- 标签之间的水平间距 -->
+        <attr name="fl_horizontalChildGap" format="dimension"/>
+        <!-- 标签之间的垂直间距 -->
+        <attr name="fl_verticalChildGap" format="dimension"/>
+        <!-- 是否平均分配每一行的剩余水平方向的空白区域给该行的标签 -->
+        <attr name="fl_isDistributionWhiteSpacing" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="AImageView">
+        <!-- 默认图片资源，默认为null -->
+        <attr name="android:src"/>
+        <!-- 是否是圆形，默认值为false -->
+        <attr name="a_iv_isCircle" format="boolean"/>
+        <!-- 圆角矩形的半径，默认值为0dp -->
+        <attr name="a_iv_cornerRadius" format="reference|dimension"/>
+        <!-- 是否是矩形，默认值为false -->
+        <attr name="a_iv_isSquare" format="boolean"/>
+        <!-- 描边的宽度，默认值为0dp -->
+        <attr name="a_iv_borderWidth" format="reference|dimension"/>
+        <!-- 描边的颜色，默认值为Color.WHITE -->
+        <attr name="a_iv_borderColor" format="reference|color"/>
+    </declare-styleable>
+
+    <declare-styleable name="SortableNinePhotoLayout">
+        <!-- 加号按钮开关是否打开，默认值为true -->
+        <attr name="snpl_isPlusSwitchOpened" format="boolean"/>
+        <!-- 是否可拖拽排序，默认值为true -->
+        <attr name="snpl_isSortable" format="boolean"/>
+        <!--列数-->
+        <attr name="span_count" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="ListPhotoLayout">
+        <!--加号按钮-->
+        <attr name="addImage" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="TagFlowLayout">
+        <attr name="auto_select_effect" format="boolean"></attr>
+        <attr name="max_select" format="integer"></attr>
+        <attr name="gravity">
+            <enum name="left" value="-1"/>
+            <enum name="center" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="RadarScanView">
+        <attr name="circleColor" format="color|reference"/>
+        <attr name="ringColor" format="color|reference"/>
+        <attr name="lineColor" format="color|reference"/>
+        <attr name="headColor" format="color|reference"/>
+        <attr name="tailColor" format="color|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="SwipeBackLayout">
+        <attr name="edge_size" format="dimension"/>
+        <attr name="edge_flag">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+            <enum name="bottom" value="2"/>
+            <enum name="all" value="3"/>
+        </attr>
+        <attr name="shadow_left" format="reference"/>
+        <attr name="shadow_right" format="reference"/>
+        <attr name="shadow_bottom" format="reference"/>
+    </declare-styleable>
+
+    <attr name="SwipeBackLayoutStyle" format="reference"/>
+
+    <declare-styleable name="ExpandableTextView">
+        <attr name="maxCollapsedLines" format="integer"/>
+        <attr name="animDuration" format="integer"/>
+        <attr name="animAlphaStart" format="float"/>
+        <attr name="expandDrawable" format="reference"/>
+        <attr name="collapseDrawable" format="reference"/>
+    </declare-styleable>
+    <declare-styleable name="PullScrollView">
+        <attr name="header" format="reference"/>
+        <attr name="headerHeight" format="dimension"/>
+        <attr name="headerVisibleHeight" format="dimension"/>
+    </declare-styleable>
+    <!--圆形进度条-->
+    <declare-styleable name="PercentageRing">
+        <attr name="radius" format="integer"/>
+        <attr name="circleBackground" format="color"/>
+        <attr name="circleRingColor" format="color"/>
+        <attr name="circleTextColor" format="color"/>
+
+    </declare-styleable>
+    <declare-styleable name="CircleTextProgressbar">
+        <attr name="in_circle_color" format="color"/>
+    </declare-styleable>
+
+    <!--扫一扫-->
+    <declare-styleable name="BarcodeScannerView">
+        <attr name="shouldScaleToFill" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="MultipleStatusView">
+        <attr name="loadingView" format="reference"/>
+        <attr name="errorView" format="reference"/>
+        <attr name="emptyView" format="reference"/>
+        <attr name="noNetworkView" format="reference"/>
+        <attr name="contentView" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="DropDownMenu">
+
+        <attr name="ddunderlineColor" format="color"/>
+        <attr name="dddividerColor" format="color"/>
+        <attr name="ddtextSelectedColor" format="color"/>
+        <attr name="ddtextUnselectedColor" format="color"/>
+        <attr name="ddmenuBackgroundColor" format="color"/>
+        <attr name="ddmaskColor" format="color"/>
+        <attr name="ddmenuTextSize" format="dimension"/>
+        <attr name="ddmenuSelectedIcon" format="reference"/>
+        <attr name="ddmenuUnselectedIcon" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="TitleBar">
+        <!-- 项目中把下面这五项定义在styles.xml里 -->
+        <attr name="bgatitlebar_leftAndRightTextColor" format="reference|color"/>
+        <attr name="bgatitlebar_titleTextColor" format="reference|color"/>
+        <attr name="bgatitlebar_leftAndRightTextSize" format="reference|dimension"/>
+        <attr name="bgatitlebar_titleTextSize" format="reference|dimension"/>
+        <attr name="bgatitlebar_leftAndRightPadding" format="reference|dimension"/>
+
+        <!-- 下面这几项更具每个页面的业务写在layout中 -->
+        <attr name="bgatitlebar_leftText" format="reference|string"/>
+        <attr name="bgatitlebar_rightText" format="reference|string"/>
+        <attr name="bgatitlebar_rightSecondaryText" format="reference|string"/>
+        <attr name="bgatitlebar_titleText" format="reference|string"/>
+        <attr name="bgatitlebar_leftDrawable" format="reference"/>
+        <attr name="bgatitlebar_titleDrawable" format="reference"/>
+        <attr name="bgatitlebar_rightDrawable" format="reference"/>
+        <attr name="bgatitlebar_rightSecondaryDrawable" format="reference"/>
+        <!-- 当既有titleText，又有titleDrawable时，设置该属性 -->
+        <attr name="bgatitlebar_titleDrawablePadding" format="reference|dimension"/>
+        <!-- 当既有leftText，又有leftDrawable时，设置该属性 -->
+        <attr name="bgatitlebar_leftDrawablePadding" format="reference|dimension"/>
+        <!-- 当既有rightText，又有rightDrawable时，设置该属性 -->
+        <attr name="bgatitlebar_rightDrawablePadding" format="reference|dimension"/>
+        <!-- 下面三项通常情况下不用，使用默认值就好。某个界面标题特别长并且左右文字短或者左右文字特别长并且标题特别短时单独配置 -->
+        <attr name="bgatitlebar_leftMaxWidth" format="reference|dimension"/>
+        <attr name="bgatitlebar_rightMaxWidth" format="reference|dimension"/>
+        <attr name="bgatitlebar_titleMaxWidth" format="reference|dimension"/>
+        <!-- 标题文字是否为粗体，默认为true -->
+        <attr name="bgatitlebar_isTitleTextBold" format="boolean"/>
+        <!-- 左边文字是否为粗体，默认为false -->
+        <attr name="bgatitlebar_isLeftTextBold" format="boolean"/>
+        <!-- 右边文字是否为粗体，默认为false -->
+        <attr name="bgatitlebar_isRightTextBold" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="LoadingLayout">
+
+        <attr name="isFirstVisible" format="boolean"></attr>
+
+    </declare-styleable>
+
+
+</resources>

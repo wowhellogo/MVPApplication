@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="fgelv_tag_changed_visibility" type="id" />
+    <!-- qrcode -->
+    <item name="auto_focus" type="id" />
+    <item name="decode" type="id" />
+    <item name="decode_failed" type="id" />
+    <item name="decode_succeeded" type="id" />
+    <item name="restart_preview" type="id" />
+    <item name="quit" type="id" />
+    <item name="return_scan_result" type="id"/>
+    <item name="launch_product_query" type="id"/>
+
+    <item name="id_circle_menu_item_image" type="id" />
+    <item name="id_circle_menu_item_text" type="id" />
+    <item name="id_circle_menu_item_center" type="id" />
+    <item name="id_add_picture" type="id" />
+    <item name="tbl_content" type="id" />
+
+    <item type="id" name="expandable_text"/>
+    <item type="id" name="expand_collapse"/>
+
+    <!--MultipleStatusView-->
+    <item name="empty_view" type="id"/>
+    <item name="error_view" type="id"/>
+    <item name="loading_view" type="id"/>
+    <item name="content_view" type="id"/>
+    <item name="no_network_view" type="id"/>
+    <item name="empty_retry_view" type="id"/>
+    <item name="error_retry_view" type="id"/>
+    <item name="no_network_retry_view" type="id"/>
+    <item name="mFilterContentView" type="id"/>
+    <item name="fixedTabIndicator" type="id" />
+
+</resources>

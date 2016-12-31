@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout style="@style/MatchMatch">
+
+    <include layout="@layout/inc_viewstub_content"/>
+
+    <include layout="@layout/inc_viewstub_title"/>
+</FrameLayout>

@@ -1,0 +1,89 @@
+apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dataBinding {
+        enabled true
+    }
+}
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
+    mavenCentral()
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //适配support库
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportVersion"
+    compile "com.android.support:support-v4:$rootProject.ext.supportVersion"
+    compile "com.android.support:design:$rootProject.ext.supportVersion"
+    compile "com.android.support:percent:$rootProject.ext.supportVersion"
+    compile 'com.android.support:multidex:1.0.0'
+    //rxjava
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.6'
+    //Rx管理生命周期
+    compile 'com.trello:rxlifecycle:1.0'
+    compile 'com.trello:rxlifecycle-android:1.0'
+    compile 'com.trello:rxlifecycle-components:1.0'
+    //retrofit网络请求
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    //retrofit-gson转换器
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    //retrofit-Rxjava回调适配器
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+    compile 'io.reactivex:rxandroid:1.0.1'
+    //greenDao  orm数据库框架
+    compile 'de.greenrobot:greendao:2.0.0'
+    //timber日志打印
+    compile 'com.orhanobut:logger:1.15'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.afollestad.material-dialogs:core:0.9.1.0'
+    compile 'com.afollestad.material-dialogs:commons:0.9.1.0'
+
+    //图片装载框架
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'org.jetbrains:annotations:13.0'
+    //自动循环广告栏
+    compile 'com.bigkoo:convenientbanner:2.0.5'
+    //下拉刷新Ultra Pull To Refresh
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
+    //管理权限
+    compile 'pub.devrel:easypermissions:0.2.0'
+    //zxing
+    compile 'com.google.zxing:core:3.2.1'
+    //Material-ish Progress
+    compile 'com.pnikosis:materialish-progress:1.7'
+
+    //Android 和 Java 内存泄露检测
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    //左滑删除
+    compile('com.daimajia.swipelayout:library:1.2.0@aar') {
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+    //双击放大缩小控件
+    compile('com.commit451:PhotoView:1.2.5') {
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
+
+}

@@ -1,0 +1,9 @@
+<resources>
+
+    <color name="text_grey">#737373</color>
+    <color name="text_blue">#18B4ED</color>
+    <color name="text_blue_deep">#5474B5</color>
+    <color name="text_red">#EE2C2C</color>
+    <color name="text_green">#66CD00</color>
+
+</resources>

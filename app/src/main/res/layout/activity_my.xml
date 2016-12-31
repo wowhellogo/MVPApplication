@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="eventHandler"
+            type="com.hao.common.main.MyActivity"/>
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:id="@+id/activity_my"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@color/windowBackground"
+                  android:orientation="vertical"
+                  tools:context="com.haomvp.main.MyActivity">
+        <com.hao.common.widget.titlebar.TitleBar
+            android:id="@+id/titleBar"
+            style="@style/TitleBar"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</layout>
+
+

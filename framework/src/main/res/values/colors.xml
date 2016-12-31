@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#92cfe6</color>
+    <color name="colorPrimaryDark">#6FBEDC</color>
+    <color name="colorAccent">#4dd0e1</color>
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#727272</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="navigationBarColor">@android:color/black</color>
+    <color name="windowBackground">#FFF5F5F5</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="colorSwipeBack">#8f000000</color>
+
+    <color name="base_text_color_light">#909090</color>
+    <color name="base_loading_background">#f7f7f7</color>
+</resources>

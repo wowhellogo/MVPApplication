@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name">common</string>
+      //Exception message
+     
+    <string name="exception_message_generic">Application error</string>
+     
+    <string name="exception_message_time_out">Connection timeout</string>
+     
+    <string name="exception_message_no_connection">No network connection</string>
+     
+    <string name="exception_message_user_not_found">User not found,check connection</string>
+     
+    <string name="exception_message_not_data">No data</string>
+     
+    <string name="exception_message_rest_error">Request error</string>
+     
+    <string name="exception_message_resolve_error">Resolve error</string>
+     
+    <string name="qrcode">QR Code</string>
+     
+    <string name="scan_tips">Please aim at QR Code to scan automatically</string>
+     
+    <string name="all_image">All images</string>
+     
+    <string name="confirm">Confirm</string>
+     
+    <string name="choose">Choose</string>
+     
+    <string name="param_not_allow_empty">%1$s Not allow empty</string>
+     
+    <string name="take_picture">Take picture</string>
+     
+    <string name="toast_photo_picker_max">Max %1$s pictures</string>
+     
+    <string name="photo_not_support">Take photo not support</string>
+     
+    <string name="rationale_ask_again">No permission, Please set application.</string>
+     
+    <string name="title_settings_dialog">Permission request</string>
+     
+    <string name="setting">Setting</string>
+     
+    <string name="listview_loading">Loading...</string>
+     
+    <string name="nomore_loading">Loading finished</string>
+     
+    <string name="download_server_error">Sever error:%s</string>
+     
+    <string name="download_not_content">File not existed</string>
+     
+    <string name="download_network_error">Network error,try again later</string>
+     
+    <string name="download_io_error">IO error</string>
+     
+    <string name="download_not_space">Insufficient memory, please clear it</string>
+     
+    <string name="sd_not_available">SD card not available</string>
+     
+    <string name="download_unknown">Unknown error</string>
+     
+    <string name="download_service_stop">Download service to be stopped, please enable it</string>
+     
+    <string name="download_the_open">Click to open after download finished</string>
+     
+    <string name="prompt">Prompt</string>
+     
+    <string name="sure">Confirm</string>
+     
+    <string name="cancel">Cancel</string>
+     
+    <string name="need_to_locate_the_relevant_grant_permissions">Need to be granted Location permission</string>
+     
+    <string name="error_bluetooth_not_available">Bluetooth not available</string>
+     
+    <string name="error_bluetooth_disabled">Bluetooth disable</string>
+     
+    <string name="error_location_permission_missing">Not granted Bluetooth permission</string>
+     
+    <string name="error_location_services_disabled">Location service disable</string>
+     
+    <string name="error_unable_to_start_scanning">Not found Bluetooth device</string>
+     
+    <integer name="viewfinder_border_width">4</integer>
+     
+    <integer name="viewfinder_border_length">60</integer>
+</resources>

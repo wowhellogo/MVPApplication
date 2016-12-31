@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MVPApplication</string>
+    <string name="title_activity_my">MyActivity</string>
+</resources>
