@@ -12,12 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.jakewharton.rxbinding.view.RxView;
 import com.hao.common.R;
-import com.hao.common.manager.AppManager;
 import com.hao.common.nucleus.presenter.Presenter;
 import com.hao.common.nucleus.view.NucleusRxFragment;
 import com.hao.common.widget.titlebar.TitleBar;
+import com.jakewharton.rxbinding.view.RxView;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -46,6 +45,7 @@ public abstract class BaseFragment<P extends Presenter> extends NucleusRxFragmen
         // 避免多次从xml中加载布局文件
         if (mContentView == null) {
             initContentView();
+            initView(savedInstanceState);
             setListener();
             processLogic(savedInstanceState);
         } else {
@@ -162,6 +162,14 @@ public abstract class BaseFragment<P extends Presenter> extends NucleusRxFragmen
         ViewStubCompat viewStub = getViewById(R.id.contentVs);
         viewStub.setLayoutResource(getRootLayoutResID());
         viewStub.inflate();
+    }
+
+
+    public BaseActivity getBaseActivity() {
+        if (getActivity() instanceof BaseActivity) {
+            return (BaseActivity) getActivity();
+        }
+        return null;
     }
 
 

@@ -7,7 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.transition.TransitionManager;
 import android.view.ViewGroup;
-import com.hao.common.BR;
+
 import com.hao.common.nucleus.presenter.Presenter;
 
 /**

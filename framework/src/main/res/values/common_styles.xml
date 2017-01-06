@@ -119,6 +119,41 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
+    <style name="HLine" parent="MatchOne">
+        <item name="android:background">@color/adapter_line</item>
+    </style>
+
+    <style name="HLine.LeftMargin">
+        <item name="android:layout_marginLeft">@dimen/adapter_horizontal_margin</item>
+    </style>
+
+    <style name="HLine.RightMargin">
+        <item name="android:layout_marginRight">@dimen/adapter_horizontal_margin</item>
+    </style>
+
+    <style name="HLine.BothMargin">
+        <item name="android:layout_marginRight">@dimen/adapter_horizontal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/adapter_horizontal_margin</item>
+    </style>
+
+    <style name="VLine" parent="OneMatch">
+        <item name="android:background">@color/adapter_line</item>
+    </style>
+
+    <style name="VLine.TopMargin">
+        <item name="android:layout_marginTop">@dimen/adapter_vertical_margin</item>
+    </style>
+
+    <style name="VLine.BottomMargin">
+        <item name="android:layout_marginBottom">@dimen/adapter_vertical_margin</item>
+    </style>
+
+    <style name="VLine.BothMargin">
+        <item name="android:layout_marginTop">@dimen/adapter_vertical_margin</item>
+        <item name="android:layout_marginBottom">@dimen/adapter_vertical_margin</item>
+    </style>
+
+
     <style name="Toolbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>

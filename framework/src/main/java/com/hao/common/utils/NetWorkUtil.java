@@ -11,7 +11,7 @@ import java.util.Locale;
 
 /**
  * @Package com.daoda.aijiacommunity.common.net
- * @作 用:是检测网络的一个工具包
+ * @作 用:检测网络的一个工具包
  * @创 建 人: linguoding
  * @日 期: 2016-01-19
  */

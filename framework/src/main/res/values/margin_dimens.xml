@@ -1,5 +1,10 @@
 <resources>
 
+    <dimen name="adapter_divider_size">1px</dimen>
+    <dimen name="adapter_line_size">1px</dimen>
+    <dimen name="adapter_horizontal_margin">16dp</dimen>
+    <dimen name="adapter_vertical_margin">8dp</dimen>
+
     <dimen name="margin_7">-7dp</dimen>
     <dimen name="margin_0.5">0.5dp</dimen>
     <dimen name="margin_1">1dp</dimen>

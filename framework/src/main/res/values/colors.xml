@@ -13,4 +13,7 @@
 
     <color name="base_text_color_light">#909090</color>
     <color name="base_loading_background">#f7f7f7</color>
+
+    <color name="adapter_divider">#dedede</color>
+    <color name="adapter_line">#dedede</color>
 </resources>
