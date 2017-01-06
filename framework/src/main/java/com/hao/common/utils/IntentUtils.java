@@ -7,12 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 
-/**
- * 跳转工具类
- *
- * @author yebin
- * @date 2014-10-22
- */
+
 public class IntentUtils {
 
     public static void showNetworkSetting(Context context) {

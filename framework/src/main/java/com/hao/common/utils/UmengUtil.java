@@ -20,12 +20,6 @@ import android.app.Activity;
 
 import com.hao.common.manager.AppManager;
 import com.umeng.analytics.MobclickAgent;
-
-/**
- * 作者:王浩 邮件:bingoogolapple@gmail.com
- * 创建时间:16/11/3 下午11:13
- * 描述:友盟 SDK 工具类
- */
 public class UmengUtil {
     private UmengUtil() {
     }

@@ -19,11 +19,6 @@ package com.hao.common.utils;
 import android.text.TextUtils;
 import android.widget.EditText;
 
-/**
- * 作者:王浩 邮件:bingoogolapple@gmail.com
- * 创建时间:16/11/4 上午12:11
- * 描述:
- */
 public class StringUtil {
     private StringUtil() {
     }

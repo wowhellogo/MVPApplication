@@ -39,7 +39,6 @@ import com.hao.common.exception.ApiException;
 import com.hao.common.rx.RxBus;
 import com.hao.common.rx.RxEvent;
 import com.hao.common.utils.CrashHandler;
-import com.hao.common.utils.NetUtil;
 import com.hao.common.utils.ToastUtil;
 import com.hao.common.utils.UmengUtil;
 import com.orhanobut.logger.LogLevel;
@@ -223,44 +222,6 @@ public class AppManager implements Application.ActivityLifecycleCallbacks {
         mActivityStack.remove(activity);
     }
 
-    /**
-     * 获取倒数第二个 Activity
-     *
-     * @return
-     */
-    @Nullable
-    public Activity getPenultimateActivity() {
-        Activity activity = null;
-        try {
-            if (mActivityStack.size() > 1) {
-                activity = mActivityStack.get(mActivityStack.size() - 2);
-            }
-        } catch (Exception e) {
-        }
-        return activity;
-    }
-
-    public static void onPanelSlide(float slideOffset) {
-        try {
-            Activity activity = getInstance().getPenultimateActivity();
-            if (activity != null) {
-                View decorView = activity.getWindow().getDecorView();
-                ViewCompat.setTranslationX(decorView, -(decorView.getMeasuredWidth() / 3.0f) * (1 - slideOffset));
-            }
-        } catch (Exception e) {
-        }
-    }
-
-    public static void onPanelClosed() {
-        try {
-            Activity activity = getInstance().getPenultimateActivity();
-            if (activity != null) {
-                View decorView = activity.getWindow().getDecorView();
-                ViewCompat.setTranslationX(decorView, 0);
-            }
-        } catch (Exception e) {
-        }
-    }
 
     /**
      * Activity栈是否是空的
@@ -429,6 +390,46 @@ public class AppManager implements Application.ActivityLifecycleCallbacks {
             return "";
         }
     }
+
+    /**
+     * 获取倒数第二个 Activity
+     *
+     * @return
+     */
+    @Nullable
+    public Activity getPenultimateActivity() {
+        Activity activity = null;
+        try {
+            if (mActivityStack.size() > 1) {
+                activity = mActivityStack.get(mActivityStack.size() - 2);
+            }
+        } catch (Exception e) {
+        }
+        return activity;
+    }
+
+    public static void onPanelSlide(float slideOffset) {
+        try {
+            Activity activity = getInstance().getPenultimateActivity();
+            if (activity != null) {
+                View decorView = activity.getWindow().getDecorView();
+                ViewCompat.setTranslationX(decorView, -(decorView.getMeasuredWidth() / 3.0f) * (1 - slideOffset));
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public static void onPanelClosed() {
+        try {
+            Activity activity = getInstance().getPenultimateActivity();
+            if (activity != null) {
+                View decorView = activity.getWindow().getDecorView();
+                ViewCompat.setTranslationX(decorView, 0);
+            }
+        } catch (Exception e) {
+        }
+    }
+
 
     /**
      * 应用是否在后台

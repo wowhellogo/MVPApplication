@@ -29,11 +29,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/**
- * 作者:王浩 邮件:bingoogolapple@gmail.com
- * 创建时间:16/1/15 上午12:16
- * 描述:
- */
 public class StorageUtil {
 
     private StorageUtil() {

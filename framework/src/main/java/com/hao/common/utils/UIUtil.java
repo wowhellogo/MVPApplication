@@ -34,12 +34,35 @@ public class UIUtil {
     private UIUtil() {
     }
 
+    /**
+     * dp转px
+     */
     public static int dp2px(float dpValue) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue, AppManager.getApp().getResources().getDisplayMetrics());
     }
 
+    /**
+     * sp转px
+     */
     public static int sp2px(float spValue) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spValue, AppManager.getApp().getResources().getDisplayMetrics());
+    }
+
+
+    /**
+     * px转dp
+     *
+     */
+    public static float px2dp(float pxVal) {
+        final float scale = AppManager.getApp().getResources().getDisplayMetrics().density;
+        return (pxVal / scale);
+    }
+
+    /**
+     * px转sp
+     */
+    public static float px2sp(float pxVal) {
+        return (pxVal / AppManager.getApp().getResources().getDisplayMetrics().scaledDensity);
     }
 
     public static int getColor(@ColorRes int id) {

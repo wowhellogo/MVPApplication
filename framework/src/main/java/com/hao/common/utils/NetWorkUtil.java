@@ -1,8 +1,10 @@
-package com.hao.common.net;
+package com.hao.common.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import com.hao.common.manager.AppManager;
 
 import java.util.Locale;
 
@@ -18,15 +20,20 @@ public class NetWorkUtil {
         WIFI, CMNET, CMWAP, noneNet, GWAP_3, GNET_3, UNIWAP, UNINET, CTWAP, CTNET
     }
 
+    private static ConnectivityManager getConnectivityManager() {
+        return (ConnectivityManager) AppManager.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
+    }
+
+    public static boolean isWifiConnected() {
+        NetworkInfo networkInfo = getConnectivityManager().getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        return networkInfo != null && networkInfo.isConnected();
+    }
+
     /**
      * 网络是否可用
-     *
-     * @param context
-     * @return
      */
-    public static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager mgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo[] info = mgr.getAllNetworkInfo();
+    public static boolean isNetworkAvailable() {
+        NetworkInfo[] info = getConnectivityManager().getAllNetworkInfo();
         if (info != null) {
             for (int i = 0; i < info.length; i++) {
                 if (info[i].getState() == NetworkInfo.State.CONNECTED) {
@@ -40,16 +47,12 @@ public class NetWorkUtil {
     /**
      * 判断是否有网络连接
      *
-     * @param context
      * @return
      */
-    public static boolean isNetworkConnected(Context context) {
-        if (context != null) {
-            ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
-            if (mNetworkInfo != null) {
-                return mNetworkInfo.isAvailable();
-            }
+    public static boolean isNetworkConnected() {
+        NetworkInfo mNetworkInfo = getConnectivityManager().getActiveNetworkInfo();
+        if (mNetworkInfo != null) {
+            return mNetworkInfo.isAvailable();
         }
         return false;
     }
@@ -57,51 +60,42 @@ public class NetWorkUtil {
     /**
      * 判断WIFI网络是否可用
      *
-     * @param context
      * @return
      */
-    public static boolean isWIFIConnected(Context context) {
-        if (context != null) {
-            ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo mWIFINetworkInfo = mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-            if (mWIFINetworkInfo != null) {
-                return mWIFINetworkInfo.isAvailable();
-            }
+    public static boolean isWIFIConnected() {
+        NetworkInfo mWIFINetworkInfo = getConnectivityManager().getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (mWIFINetworkInfo != null) {
+            return mWIFINetworkInfo.isAvailable();
         }
+
         return false;
     }
 
     /**
      * 判断MOBILE网络是否可用
      *
-     * @param context
      * @return
      */
-    public static boolean isMobileConnected(Context context) {
-        if (context != null) {
-            ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo mMobileNetworkInfo = mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-            if (mMobileNetworkInfo != null) {
-                return mMobileNetworkInfo.isAvailable();
-            }
+    public static boolean isMobileConnected() {
+        NetworkInfo mMobileNetworkInfo = getConnectivityManager().getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (mMobileNetworkInfo != null) {
+            return mMobileNetworkInfo.isAvailable();
         }
+
         return false;
     }
 
     /**
      * 获取当前网络连接的类型信息
      *
-     * @param context
      * @return
      */
-    public static int getConnectedType(Context context) {
-        if (context != null) {
-            ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
-            if (mNetworkInfo != null && mNetworkInfo.isAvailable()) {
-                return mNetworkInfo.getType();
-            }
+    public static int getConnectedType() {
+        NetworkInfo mNetworkInfo = getConnectivityManager().getActiveNetworkInfo();
+        if (mNetworkInfo != null && mNetworkInfo.isAvailable()) {
+            return mNetworkInfo.getType();
         }
+
         return -1;
     }
 
@@ -113,9 +107,8 @@ public class NetWorkUtil {
      * @参 数: @param context
      * @参 数: @return
      */
-    public static NetType getAPNType(Context context) {
-        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+    public static NetType getAPNType() {
+        NetworkInfo networkInfo = getConnectivityManager().getActiveNetworkInfo();
         if (networkInfo == null) {
             return NetType.noneNet;
         }
@@ -157,8 +150,6 @@ public class NetWorkUtil {
          * 中国移动cmnet
          */
         public static String CMNET = "cmnet";
-        // 中国联通3GWAP设置 中国联通3G因特网设置 中国联通WAP设置 中国联通因特网设置
-        // 3gwap 3gnet uniwap uninet
         /**
          * 3G wap 中国联通3gwap APN
          */

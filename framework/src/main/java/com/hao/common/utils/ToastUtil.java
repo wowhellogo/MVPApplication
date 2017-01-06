@@ -25,11 +25,6 @@ import com.hao.common.manager.AppManager;
 import com.hao.common.rx.RxUtil;
 
 
-/**
- * 作者:王浩 邮件:bingoogolapple@gmail.com
- * 创建时间:15/9/2 下午5:17
- * 描述:
- */
 public class ToastUtil {
 
     private ToastUtil() {

@@ -7,13 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout.LayoutParams;
-
-/**
- * View工具类
- *
- * @author yebin
- * @date 2014-10-23
- */
 public class ViewUtils {
 
     /**

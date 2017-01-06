@@ -19,7 +19,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainCo
      * @return
      */
     @Override
-    protected boolean isSupportSwipeBack() {
+    public boolean isSupportSwipeBack() {
         return false;
     }
 
@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainCo
     }
 
     public void onText(View view) {
-        forward(MyActivity.class);
+        mSwipeBackHelper.forward(MyActivity.class);
     }
 
     @Override

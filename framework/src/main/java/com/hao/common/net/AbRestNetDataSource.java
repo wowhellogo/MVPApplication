@@ -1,5 +1,4 @@
 package com.hao.common.net;
-import com.hao.common.utils.NetUtil;
 import com.hao.common.utils.StorageUtil;
 
 import java.io.File;

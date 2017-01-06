@@ -5,7 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
 import com.hao.common.adapter.BaseRecyclerViewAdapter;
-import com.hao.common.utils.CommonUtils;
+import com.hao.common.utils.ToastUtil;
 import com.hao.common.widget.LoadingLayout;
 import com.hao.common.widget.xrecyclerview.XRecyclerView;
 
@@ -67,7 +67,7 @@ public class LoadPageListDataView<M> implements ILoadPageListDataView<M> {
     @Override
     public void onNoDate() {
         if (mRefreshLayout != null) mRefreshLayout.setRefreshing(false);
-        CommonUtils.show(getContext(), "暂无数据");
+        ToastUtil.show("暂无数据");
     }
 
     @Override
@@ -106,7 +106,7 @@ public class LoadPageListDataView<M> implements ILoadPageListDataView<M> {
 
     @Override
     public void showError(String message) {
-        CommonUtils.show(getContext(), message);
+        ToastUtil.show(message);
     }
 
     @Override

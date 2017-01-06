@@ -1,6 +1,5 @@
 package com.hao.common.base;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IdRes;
@@ -15,14 +14,14 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.jakewharton.rxbinding.view.RxView;
 import com.hao.common.R;
+import com.hao.common.helper.SwipeBackHelper;
 import com.hao.common.nucleus.presenter.Presenter;
 import com.hao.common.nucleus.view.NucleusRxAppCompatActivity;
 import com.hao.common.utils.KeyboardUtil;
 import com.hao.common.utils.StatusBarUtil;
-import com.hao.common.widget.swipeback.SwipeBackLayout;
 import com.hao.common.widget.titlebar.TitleBar;
+import com.jakewharton.rxbinding.view.RxView;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -37,11 +36,12 @@ import rx.functions.Action1;
  * @创 建 人: 林国定 邮箱：linggoudingg@gmail.com
  * @日 期: 2016年12月14日  11:31
  */
-public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppCompatActivity<P> implements TitleBar.Delegate, EasyPermissions.PermissionCallbacks, SwipeBackLayout.PanelSlideListener {
+public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppCompatActivity<P> implements TitleBar.Delegate, EasyPermissions.PermissionCallbacks, SwipeBackHelper.Delegate {
     protected MaterialDialog mLoadingDialog;
+
     private Toolbar mToolbar;
     private TitleBar mTitleBar;
-    private SwipeBackLayout mSwipeBackLayout;
+    public SwipeBackHelper mSwipeBackHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,24 +115,20 @@ public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppComp
      * 初始化滑动返回
      */
     private void initSwipeBackFinish() {
-        if (isSupportSwipeBack()) {
-            mSwipeBackLayout = new SwipeBackLayout(this);
-            mSwipeBackLayout.attachToActivity(this);
-            mSwipeBackLayout.setPanelSlideListener(this);
+        mSwipeBackHelper = new SwipeBackHelper(this, this);
 
-            // 设置滑动返回是否可用。默认值为 true
-            mSwipeBackLayout.setSwipeBackEnable(true);
-            // 设置是否仅仅跟踪左侧边缘的滑动返回。默认值为 true
-            mSwipeBackLayout.setIsOnlyTrackingLeftEdge(true);
-            // 设置是否是微信滑动返回样式。默认值为 true「如果需要启用微信滑动返回样式，必须在 Application 的 onCreate 方法中执行 SwipeBackManager.getInstance().init(this)」
-            mSwipeBackLayout.setIsWeChatStyle(true);
-            // 设置阴影资源 id。默认值为 R.drawable.swipebacklayout_shadow
-            mSwipeBackLayout.setShadowResId(R.drawable.swipebacklayout_shadow);
-            // 设置是否显示滑动返回的阴影效果。默认值为 true
-            mSwipeBackLayout.setIsNeedShowShadow(true);
-            // 设置阴影区域的透明度是否根据滑动的距离渐变。默认值为 true
-            mSwipeBackLayout.setIsShadowAlphaGradient(true);
-        }
+        // 设置滑动返回是否可用。默认值为 true
+        mSwipeBackHelper.setSwipeBackEnable(true);
+        // 设置是否仅仅跟踪左侧边缘的滑动返回。默认值为 true
+        mSwipeBackHelper.setIsOnlyTrackingLeftEdge(true);
+        // 设置是否是微信滑动返回样式。默认值为 true
+        mSwipeBackHelper.setIsWeChatStyle(true);
+        // 设置阴影资源 id。默认值为 R.drawable.swipebacklayout_shadow
+        mSwipeBackHelper.setShadowResId(R.drawable.swipebacklayout_shadow);
+        // 设置是否显示滑动返回的阴影效果。默认值为 true
+        mSwipeBackHelper.setIsNeedShowShadow(true);
+        // 设置阴影区域的透明度是否根据滑动的距离渐变。默认值为 true
+        mSwipeBackHelper.setIsShadowAlphaGradient(true);
     }
 
     /**
@@ -140,19 +136,9 @@ public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppComp
      *
      * @return
      */
-    protected boolean isSupportSwipeBack() {
+    @Override
+    public boolean isSupportSwipeBack() {
         return true;
-    }
-
-    /**
-     * 动态设置滑动返回是否可用。
-     *
-     * @param swipeBackEnable
-     */
-    protected void setSwipeBackEnable(boolean swipeBackEnable) {
-        if (mSwipeBackLayout != null) {
-            mSwipeBackLayout.setSwipeBackEnable(swipeBackEnable);
-        }
     }
 
     protected void setStatusBar() {
@@ -189,104 +175,8 @@ public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppComp
 
     @Override
     public void onBackPressed() {
-        backward();
+        mSwipeBackHelper.swipeBackward();
     }
-
-    /**
-     * 跳转到下一个Activity，并且销毁当前Activity
-     *
-     * @param cls 下一个Activity的Class
-     */
-    public void forwardAndFinish(Class<?> cls) {
-        forward(cls);
-        finish();
-    }
-
-    /**
-     * 跳转到下一个Activity，不销毁当前Activity
-     *
-     * @param cls 下一个Activity的Class
-     */
-    public void forward(Class<?> cls) {
-        KeyboardUtil.closeKeyboard(this);
-        startActivity(new Intent(this, cls));
-        executeForwardAnim();
-    }
-
-    public void forward(Class<?> cls, int requestCode) {
-        forward(new Intent(this, cls), requestCode);
-    }
-
-    public void forwardAndFinish(Intent intent) {
-        forward(intent);
-        finish();
-    }
-
-    public void forward(Intent intent) {
-        KeyboardUtil.closeKeyboard(this);
-        startActivity(intent);
-        executeForwardAnim();
-    }
-
-    public void forward(Intent intent, int requestCode) {
-        KeyboardUtil.closeKeyboard(this);
-        startActivityForResult(intent, requestCode);
-        executeForwardAnim();
-    }
-
-    /**
-     * 执行跳转到下一个Activity的动画
-     */
-    public void executeForwardAnim() {
-        overridePendingTransition(R.anim.activity_forward_enter, R.anim.activity_forward_exit);
-    }
-
-    /**
-     * 回到上一个Activity，并销毁当前Activity
-     */
-    public void backward() {
-        KeyboardUtil.closeKeyboard(this);
-        finish();
-        executeBackwardAnim();
-    }
-
-    /**
-     * 滑动返回上一个Activity，并销毁当前Activity
-     */
-    public void swipeBackward() {
-        KeyboardUtil.closeKeyboard(this);
-        finish();
-        executeSwipeBackAnim();
-    }
-
-    /**
-     * 回到上一个Activity，并销毁当前Activity（应用场景：欢迎、登录、注册这三个界面）
-     *
-     * @param cls 上一个Activity的Class
-     */
-    public void backwardAndFinish(Class<?> cls) {
-        KeyboardUtil.closeKeyboard(this);
-        startActivity(new Intent(this, cls));
-        executeBackwardAnim();
-        finish();
-    }
-
-    /**
-     * 执行回到到上一个Activity的动画
-     */
-    public void executeBackwardAnim() {
-        overridePendingTransition(R.anim.activity_backward_enter, R.anim.activity_backward_exit);
-    }
-
-    /**
-     * 执行滑动返回到到上一个Activity的动画
-     */
-    public void executeSwipeBackAnim() {
-        overridePendingTransition(R.anim.activity_swipeback_enter, R.anim.activity_swipeback_exit);
-    }
-
-
-
     /**
      * 获取布局文件根视图
      *
@@ -435,18 +325,29 @@ public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppComp
 
     }
 
+    /**
+     * 正在滑动返回
+     *
+     * @param slideOffset 从 0 到 1
+     */
     @Override
-    public void onPanelSlide(View panel, float slideOffset) {
+    public void onSwipeBackLayoutSlide(float slideOffset) {
 
     }
 
+    /**
+     * 没达到滑动返回的阈值，取消滑动返回动作，回到默认状态
+     */
     @Override
-    public void onPanelOpened(View panel) {
-        swipeBackward();
+    public void onSwipeBackLayoutCancel() {
+
     }
 
+    /**
+     * 滑动返回执行完毕，销毁当前 Activity
+     */
     @Override
-    public void onPanelClosed(View panel) {
-
+    public void onSwipeBackLayoutExecuted() {
+        mSwipeBackHelper.swipeBackward();
     }
 }
