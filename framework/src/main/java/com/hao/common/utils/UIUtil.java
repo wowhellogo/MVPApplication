@@ -16,13 +16,16 @@
 
 package com.hao.common.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -81,33 +84,60 @@ public class UIUtil {
         return rectangle.top;
     }
 
-    public static int getNavigationBarHeight() {
+    /**
+     * 获取底部导航栏高度
+     *
+     * @param activity
+     * @return
+     */
+    public static int getNavigationBarHeight(Activity activity) {
         int navigationBarHeight = 0;
-        Resources resources = AppManager.getApp().getResources();
-        int resourceId = resources.getIdentifier(resources.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
-        if (resourceId > 0 && checkDeviceHasNavigationBar()) {
+        Resources resources = activity.getResources();
+        int resourceId = resources.getIdentifier(resources.getConfiguration().orientation ==
+                Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
+        if (resourceId > 0 && checkDeviceHasNavigationBar(activity)) {
             navigationBarHeight = resources.getDimensionPixelSize(resourceId);
         }
         return navigationBarHeight;
     }
 
-    public static boolean checkDeviceHasNavigationBar() {
+    /**
+     * 检测是否具有底部导航栏
+     *
+     * @param activity
+     * @return
+     */
+    public static boolean checkDeviceHasNavigationBar(Activity activity) {
         boolean hasNavigationBar = false;
-        Resources rs = AppManager.getApp().getResources();
-        int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
-        if (id > 0) {
-            hasNavigationBar = rs.getBoolean(id);
-        }
-        try {
-            Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
-            Method m = systemPropertiesClass.getMethod("get", String.class);
-            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
-            if ("1".equals(navBarOverride)) {
-                hasNavigationBar = false;
-            } else if ("0".equals(navBarOverride)) {
-                hasNavigationBar = true;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            WindowManager windowManager = activity.getWindowManager();
+            Display display = windowManager.getDefaultDisplay();
+            DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+            display.getRealMetrics(realDisplayMetrics);
+            int realHeight = realDisplayMetrics.heightPixels;
+            int realWidth = realDisplayMetrics.widthPixels;
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            display.getMetrics(displayMetrics);
+            int displayHeight = displayMetrics.heightPixels;
+            int displayWidth = displayMetrics.widthPixels;
+            hasNavigationBar = (realWidth - displayWidth) > 0 || (realHeight - displayHeight) > 0;
+        } else {
+            Resources resources = activity.getResources();
+            int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
+            if (id > 0) {
+                hasNavigationBar = resources.getBoolean(id);
             }
-        } catch (Exception e) {
+            try {
+                Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
+                Method m = systemPropertiesClass.getMethod("get", String.class);
+                String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
+                if ("1".equals(navBarOverride)) {
+                    hasNavigationBar = false;
+                } else if ("0".equals(navBarOverride)) {
+                    hasNavigationBar = true;
+                }
+            } catch (Exception e) {
+            }
         }
         return hasNavigationBar;
     }

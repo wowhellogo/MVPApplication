@@ -30,16 +30,20 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 
 import com.hao.common.R;
 import com.hao.common.manager.AppManager;
+import com.hao.common.utils.UIUtil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -179,7 +183,7 @@ public class SwipeBackLayout extends ViewGroup {
      */
     private boolean mIsOnlyTrackingLeftEdge = true;
     /**
-     * 是否是微信滑动返回样式
+     * 是否是微信滑动返回样式。如果需要启用微信滑动返回样式，必须在 Application 的 onCreate 方法中执行 BGASwipeBackManager.getInstance().init(this)
      */
     private boolean mIsWeChatStyle = true;
     /**
@@ -203,12 +207,16 @@ public class SwipeBackLayout extends ViewGroup {
      */
     private View mContentView;
 
+    private Activity mActivity;
+
     /**
      * 将该滑动返回控件添加到 Activity 上
      *
      * @param activity
      */
     public void attachToActivity(Activity activity) {
+        mActivity = activity;
+
         setSliderFadeColor(Color.TRANSPARENT);
 
         mShadowView = new View(activity);
@@ -241,14 +249,14 @@ public class SwipeBackLayout extends ViewGroup {
     }
 
     /**
-     * 设置是否是微信滑动返回样式。默认值为 true
+     * 设置是否是微信滑动返回样式。默认值为 true。如果需要启用微信滑动返回样式，必须在 Application 的 onCreate 方法中执行 BGASwipeBackManager.getInstance().init(this)
      */
     public void setIsWeChatStyle(boolean isWeChatStyle) {
         mIsWeChatStyle = isWeChatStyle;
     }
 
     /**
-     * 设置阴影资源 id。默认值为 R.drawable.swipebacklayout_shadow
+     * 设置阴影资源 id。默认值为 R.drawable.bga_sbl_shadow
      *
      * @param shadowResId
      */
@@ -590,7 +598,7 @@ public class SwipeBackLayout extends ViewGroup {
         }
 
         // ======================== 新加的 START ========================
-        maxLayoutHeight -= getNavigationBarHeight(getContext());
+        maxLayoutHeight -= UIUtil.getNavigationBarHeight(mActivity);
         // ======================== 新加的 END ========================
 
         float weightSum = 0;
@@ -1329,11 +1337,8 @@ public class SwipeBackLayout extends ViewGroup {
             final int newOffset = (int) ((1 - slideOffset) * mParallaxBy);
             final int dx = oldOffset - newOffset;
 
-            if (isLayoutRtl) {
-                v.offsetLeftAndRight(-dx);
-            } else {
-                v.offsetLeftAndRight(dx);
-            }
+            if (isLayoutRtl) v.offsetLeftAndRight(-dx);
+            else v.offsetLeftAndRight(dx);
 
             if (dimViews) {
                 dimChildView(v, isLayoutRtl ? mParallaxOffset - 1
@@ -1801,47 +1806,5 @@ public class SwipeBackLayout extends ViewGroup {
     boolean isLayoutRtlSupport() {
         return ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL;
     }
-
-    /**
-     * 获取底部导航栏高度
-     *
-     * @param context
-     * @return
-     */
-    private int getNavigationBarHeight(Context context) {
-        int navigationBarHeight = 0;
-        Resources resources = context.getResources();
-        int resourceId = resources.getIdentifier(resources.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
-        if (resourceId > 0 && checkDeviceHasNavigationBar(context)) {
-            navigationBarHeight = resources.getDimensionPixelSize(resourceId);
-        }
-        return navigationBarHeight;
-    }
-
-    /**
-     * 检测是否具有底部导航栏。改方法在一加手机上判断不准确，希望有猿友能修复这个 bug
-     *
-     * @param context
-     * @return
-     */
-    private boolean checkDeviceHasNavigationBar(Context context) {
-        boolean hasNavigationBar = false;
-        Resources resources = context.getResources();
-        int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
-        if (id > 0) {
-            hasNavigationBar = resources.getBoolean(id);
-        }
-        try {
-            Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
-            Method m = systemPropertiesClass.getMethod("get", String.class);
-            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
-            if ("1".equals(navBarOverride)) {
-                hasNavigationBar = false;
-            } else if ("0".equals(navBarOverride)) {
-                hasNavigationBar = true;
-            }
-        } catch (Exception e) {
-        }
-        return hasNavigationBar;
-    }
 }
+

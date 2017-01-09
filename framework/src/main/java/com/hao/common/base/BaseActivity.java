@@ -15,11 +15,11 @@ import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.hao.common.R;
-import com.hao.common.helper.SwipeBackHelper;
 import com.hao.common.nucleus.presenter.Presenter;
 import com.hao.common.nucleus.view.NucleusRxAppCompatActivity;
 import com.hao.common.utils.KeyboardUtil;
 import com.hao.common.utils.StatusBarUtil;
+import com.hao.common.widget.swipeback.SwipeBackHelper;
 import com.hao.common.widget.titlebar.TitleBar;
 import com.jakewharton.rxbinding.view.RxView;
 

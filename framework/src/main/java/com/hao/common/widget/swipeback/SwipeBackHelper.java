@@ -1,4 +1,4 @@
-package com.hao.common.helper;
+package com.hao.common.widget.swipeback;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.DrawableRes;
@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.hao.common.R;
 import com.hao.common.utils.KeyboardUtil;
-import com.hao.common.widget.swipeback.SwipeBackLayout;
 
 /**
  * @Package com.hao.common.helper

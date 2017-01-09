@@ -1,4 +1,5 @@
 package com.hao.common.net;
+import com.hao.common.utils.NetWorkUtil;
 import com.hao.common.utils.StorageUtil;
 
 import java.io.File;
@@ -30,7 +31,7 @@ public abstract class AbRestNetDataSource {
             Request request = chain.request();//获取请求
             HttpUrl httpUrl = request.url();
             //这里就是说判读我们的网络条件，要是有网络的话就直接获取网络上面的数据，要是没有网络的话就去缓存里面取数据
-            if(NetUtil.isNetworkAvailable()){
+            if(NetWorkUtil.isNetworkAvailable()){
                 request = request.newBuilder()
                         .url(httpUrl)
                         .cacheControl(CacheControl.FORCE_NETWORK)

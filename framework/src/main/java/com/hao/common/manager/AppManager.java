@@ -39,6 +39,7 @@ import com.hao.common.exception.ApiException;
 import com.hao.common.rx.RxBus;
 import com.hao.common.rx.RxEvent;
 import com.hao.common.utils.CrashHandler;
+import com.hao.common.utils.NetWorkUtil;
 import com.hao.common.utils.ToastUtil;
 import com.hao.common.utils.UmengUtil;
 import com.orhanobut.logger.LogLevel;
@@ -104,7 +105,7 @@ public class AppManager implements Application.ActivityLifecycleCallbacks {
             public void onReceive(Context context, Intent intent) {
                 if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
                     if (!mIsFirstReceiveBroadcast) {
-                        if (NetUtil.isNetworkAvailable()) {
+                        if (NetWorkUtil.isNetworkAvailable()) {
                             RxBus.send(new RxEvent.NetworkConnectedEvent());
                         } else {
                             RxBus.send(new RxEvent.NetworkDisconnectedEvent());
