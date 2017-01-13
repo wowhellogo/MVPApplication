@@ -6,8 +6,6 @@ import android.support.annotation.IdRes;
 import android.support.annotation.IntRange;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.ViewStubCompat;
@@ -38,7 +36,7 @@ import rx.functions.Action1;
  * @创 建 人: 林国定 邮箱：linggoudingg@gmail.com
  * @日 期: 2016年12月14日  11:31
  */
-public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppCompatActivity<P> implements TitleBar.Delegate,
+public abstract class BaseDecorActivity<P extends Presenter> extends NucleusRxAppCompatActivity<P> implements TitleBar.Delegate,
         EasyPermissions.PermissionCallbacks, SwipeBackHelper.Delegate {
     protected MaterialDialog mLoadingDialog;
 
@@ -57,19 +55,6 @@ public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppComp
         setListener();
         processLogic(savedInstanceState);
     }
-
-    protected void addFragment(int containerViewId, Fragment fragment) {
-        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(containerViewId, fragment);
-        fragmentTransaction.commit();
-    }
-
-    protected void replaceFragment(int containerViewId, Fragment fragment) {
-        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(containerViewId, fragment);
-        fragmentTransaction.commitAllowingStateLoss();
-    }
-
 
     protected void initContentView() {
         if (getTopBarType() == TopBarType.None) {
@@ -108,6 +93,7 @@ public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppComp
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
 
         ViewStubCompat viewStub = getViewById(R.id.contentVs);
         viewStub.setLayoutResource(getRootLayoutResID());
@@ -191,7 +177,7 @@ public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppComp
 
     @Override
     public void onBackPressed() {
-        mSwipeBackHelper.backward();
+        mSwipeBackHelper.swipeBackward();
     }
 
     /**
@@ -291,11 +277,6 @@ public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppComp
         showLoadingDialog(getString(resId));
     }
 
-    public void showLoadingDialog() {
-        showLoadingDialog(getString(R.string.load_str));
-    }
-
-
     public void showLoadingDialog(String msg) {
         if (mLoadingDialog == null) {
             mLoadingDialog = new MaterialDialog.Builder(this)
@@ -373,3 +354,4 @@ public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppComp
         mSwipeBackHelper.swipeBackward();
     }
 }
+

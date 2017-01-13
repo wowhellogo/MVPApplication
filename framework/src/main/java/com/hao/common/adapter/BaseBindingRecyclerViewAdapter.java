@@ -25,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hao.common.BR;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,7 @@ import java.util.List;
  * 创建时间:16/11/10 下午9:36
  * 描述:在子类的 getItemViewType 方法中，把 item 的布局文件资源 id 作为返回值
  */
-public abstract class BaseBindingRecyclerViewAdapter<M, B extends ViewDataBinding> extends RecyclerView.Adapter<BaseBindingViewHolder<B>> {
+public class BaseBindingRecyclerViewAdapter<M, B extends ViewDataBinding> extends RecyclerView.Adapter<BaseBindingViewHolder<B>> {
     private LayoutInflater mLayoutInflater;
     protected List<M> mData = new ArrayList<>();
     protected Object mItemEventHandler;
@@ -77,7 +79,6 @@ public abstract class BaseBindingRecyclerViewAdapter<M, B extends ViewDataBindin
     }
 
 
-
     @Override
     public BaseBindingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new BaseBindingViewHolder(this, DataBindingUtil.inflate(getLayoutInflater(parent), viewType, parent, false));
@@ -91,20 +92,19 @@ public abstract class BaseBindingRecyclerViewAdapter<M, B extends ViewDataBindin
         M model = getItem(position);
         B binding = viewHolder.getBinding();
 
-        bindModel(binding, position, model);
+        binding.setVariable(BR.viewHolder, viewHolder);
+        binding.setVariable(BR.model, model);
+        binding.setVariable(BR.itemEventHandler, mItemEventHandler);
         binding.executePendingBindings();
+
+        bindSpecialModel(binding, position, model);
 
         mIsIgnoreCheckedChanged = false;
     }
 
-    /**
-     * 绑定 item 数据模型
-     *
-     * @param binding
-     * @param position
-     * @param model
-     */
-    protected abstract void bindModel(B binding, int position, M model);
+    private void bindSpecialModel(B binding, int position, M model) {
+
+    }
 
     public boolean isIgnoreCheckedChanged() {
         return mIsIgnoreCheckedChanged;
@@ -137,6 +137,7 @@ public abstract class BaseBindingRecyclerViewAdapter<M, B extends ViewDataBindin
     public void setItemEventHandler(Object itemEventHandler) {
         mItemEventHandler = itemEventHandler;
     }
+
 
     public final void notifyItemRangeInsertedWrapper(int positionStart, int itemCount) {
         if (mHeaderAndFooterAdapter == null) {

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.transition.TransitionManager;
 import android.view.ViewGroup;
 
+import com.hao.common.BR;
 import com.hao.common.nucleus.presenter.Presenter;
 
 /**
@@ -21,6 +22,7 @@ public abstract class BaseDataBindingActivity<P extends Presenter, B extends Vie
     @Override
     protected void initContentView() {
         mBinding = DataBindingUtil.setContentView(this, getRootLayoutResID());
+        mBinding.setVariable(BR.eventHandler, this);
         mBinding.addOnRebindCallback(new OnRebindCallback() {
             @Override
             public boolean onPreBind(ViewDataBinding binding) {

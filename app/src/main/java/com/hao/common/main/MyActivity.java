@@ -22,16 +22,9 @@ public class MyActivity extends BaseDataBindingActivity<MyPresenter, ActivityMyB
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        mBinding.setEventHandler(this);
         mBinding.titleBar.setTitleText("测试用户列表");
         ViewUtils.initVerticalLinearRecyclerView(this, mBinding.recyclerView);
-        mAdapter = new BaseBindingRecyclerViewAdapter<User, ItemUserBinding>(R.layout.item_user) {
-            @Override
-            protected void bindModel(ItemUserBinding binding, int position, User model) {
-                binding.setModel(model);
-                binding.setItemEventHandler(MyActivity.this);
-            }
-        };
+        mAdapter = new BaseBindingRecyclerViewAdapter<User, ItemUserBinding>(R.layout.item_user);
         mBinding.recyclerView.setAdapter(mAdapter);
         mAdapter.setItemEventHandler(this);
         mAdapter.setData(getPresenter().getUsers());

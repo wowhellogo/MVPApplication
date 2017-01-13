@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hao.common.BR;
 import com.hao.common.nucleus.presenter.Presenter;
 
 /**
@@ -27,6 +28,7 @@ public abstract class BaseDataBindingFragment<P extends Presenter, B extends Vie
         // 避免多次从xml中加载布局文件
         if (mBinding == null) {
             mBinding = DataBindingUtil.inflate(inflater, getRootLayoutResID(), container, false);
+            mBinding.setVariable(BR.eventHandler, this);
             initView(savedInstanceState);
             setListener();
             processLogic(savedInstanceState);

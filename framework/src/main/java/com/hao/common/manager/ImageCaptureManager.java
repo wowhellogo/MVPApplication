@@ -1,4 +1,4 @@
-package com.hao.common.utils;
+package com.hao.common.manager;
 
 import android.content.Context;
 import android.content.Intent;
