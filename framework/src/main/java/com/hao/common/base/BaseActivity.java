@@ -35,7 +35,7 @@ import rx.functions.Action1;
 /**
  * @Package com.hao.common.base
  * @作 用:Activity基类,所有Activity继承它
- * @创 建 人: 林国定 邮箱：linggoudingg@gmail.com
+ * @创 建 人: linguoding 邮箱：linggoudingg@gmail.com
  * @日 期: 2016年12月14日  11:31
  */
 public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppCompatActivity<P> implements TitleBar.Delegate,
@@ -76,7 +76,7 @@ public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppComp
             setContentView(getRootLayoutResID());
         } else if (getTopBarType() == TopBarType.TitleBar) {
             initTitleBarContentView();
-        } else if (getTopBarType() == TopBarType.Toolbar) {
+        } else if (getTopBarType() == TopBarType.ToolBar) {
             initToolbarContentView();
         }
     }
@@ -322,7 +322,7 @@ public abstract class BaseActivity<P extends Presenter> extends NucleusRxAppComp
             super.setTitle(title);
         } else if (getTopBarType() == TopBarType.TitleBar) {
             mTitleBar.setTitleText(title);
-        } else if (getTopBarType() == TopBarType.Toolbar) {
+        } else if (getTopBarType() == TopBarType.ToolBar) {
             getSupportActionBar().setTitle(title);
         }
     }

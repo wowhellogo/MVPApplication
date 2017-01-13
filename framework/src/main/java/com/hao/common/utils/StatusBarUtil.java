@@ -1,4 +1,5 @@
 package com.hao.common.utils;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -11,7 +12,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.hao.common.base.TitleBarLayout;
 import com.hao.common.widget.StatusBarView;
+import com.hao.common.widget.titlebar.TitleBar;
 
 /**
  * @Package com.hao.common.utils
@@ -80,11 +83,21 @@ public class StatusBarUtil {
     public static void setColorForSwipeBack(Activity activity, @ColorInt int color, int statusBarAlpha) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             ViewGroup contentView = ((ViewGroup) activity.findViewById(android.R.id.content));
+            //ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
             contentView.setPadding(0, getStatusBarHeight(activity), 0, 0);
             contentView.setBackgroundColor(calculateStatusColor(color, statusBarAlpha));
             setTransparentForWindow(activity);
         }
     }
+
+    public static void setColorForSwipeBack(TitleBarLayout contentView, @ColorInt int color, int statusBarAlpha) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            contentView.setPadding(0, getStatusBarHeight(contentView.getContext()), 0, 0);
+            contentView.setBackgroundColor(calculateStatusColor(color, statusBarAlpha));
+            setTransparentForWindow(contentView.getActivity());
+        }
+    }
+
 
     /**
      * 设置状态栏纯色 不加半透明效果
@@ -120,7 +133,7 @@ public class StatusBarUtil {
 
     /**
      * 使状态栏半透明
-     *
+     * <p>
      * 适用于图片作为背景的界面,此时需要图片填充到状态栏
      *
      * @param activity 需要设置的activity
@@ -131,7 +144,7 @@ public class StatusBarUtil {
 
     /**
      * 使状态栏半透明
-     *
+     * <p>
      * 适用于图片作为背景的界面,此时需要图片填充到状态栏
      *
      * @param activity       需要设置的activity
@@ -147,7 +160,7 @@ public class StatusBarUtil {
 
     /**
      * 针对根布局是 CoordinatorLayout, 使状态栏半透明
-     *
+     * <p>
      * 适用于图片作为背景的界面,此时需要图片填充到状态栏
      *
      * @param activity       需要设置的activity
@@ -176,7 +189,7 @@ public class StatusBarUtil {
 
     /**
      * 使状态栏透明(5.0以上半透明效果,不建议使用)
-     *
+     * <p>
      * 适用于图片作为背景的界面,此时需要图片填充到状态栏
      *
      * @param activity 需要设置的activity

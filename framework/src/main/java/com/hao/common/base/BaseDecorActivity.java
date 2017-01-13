@@ -43,67 +43,30 @@ public abstract class BaseDecorActivity<P extends Presenter> extends NucleusRxAp
     private Toolbar mToolbar;
     private TitleBar mTitleBar;
     public SwipeBackHelper mSwipeBackHelper;
+    private TitleBarLayout mTitleBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        initSwipeBackFinish();
+        //setStatusBar();
+        //initSwipeBackFinish();
+        mTitleBarLayout = new TitleBarLayout(this);
+        mTitleBarLayout.setTopBarType(getTopBarType());
+        mTitleBarLayout.setOverlay(!isLinear());
+        mTitleBarLayout.attachToActivity(this);
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);//开启使用矢量图
         initContentView();
-        setStatusBar();
         initView(savedInstanceState);
         setListener();
         processLogic(savedInstanceState);
     }
 
     protected void initContentView() {
-        if (getTopBarType() == TopBarType.None) {
-            setContentView(getRootLayoutResID());
-        } else if (getTopBarType() == TopBarType.TitleBar) {
-            initTitleBarContentView();
-        } else if (getTopBarType() == TopBarType.Toolbar) {
-            initToolbarContentView();
-        }
-    }
-
-
-    private void initTitleBarContentView() {
-        super.setContentView(isLinear() ? R.layout.rootlayout_linear : R.layout.rootlayout_merge);
-        ViewStubCompat toolbarVs = getViewById(R.id.toolbarVs);
-        toolbarVs.setLayoutResource(R.layout.inc_titlebar);
-        toolbarVs.inflate();
-
-        mTitleBar = getViewById(R.id.titleBar);
-        mTitleBar.setDelegate(this);
-
-        ViewStubCompat viewStub = getViewById(R.id.contentVs);
-        viewStub.setLayoutResource(getRootLayoutResID());
-        viewStub.inflate();
-    }
-
-    private void initToolbarContentView() {
-        super.setContentView(isLinear() ? R.layout.rootlayout_linear : R.layout.rootlayout_merge);
-
-        ViewStubCompat toolbarVs = getViewById(R.id.toolbarVs);
-        toolbarVs.setLayoutResource(R.layout.inc_toolbar);
-        toolbarVs.inflate();
-
-        mToolbar = getViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
-
-        ViewStubCompat viewStub = getViewById(R.id.contentVs);
-        viewStub.setLayoutResource(getRootLayoutResID());
-        viewStub.inflate();
+        setContentView(getRootLayoutResID());
     }
 
     /**
      * 有 TitleBar 或者 Toolbar 时，是否为线性布局
-     *
-     * @return
      */
     protected boolean isLinear() {
         return true;
@@ -164,6 +127,7 @@ public abstract class BaseDecorActivity<P extends Presenter> extends NucleusRxAp
      */
     public void setStatusBarColor(@ColorInt int color, @IntRange(from = 0, to = 255) int statusBarAlpha) {
         StatusBarUtil.setColorForSwipeBack(this, color, statusBarAlpha);
+        //StatusBarUtil.setColor(this,getResources().getColor(R.color.colorPrimary));
     }
 
     @Override
@@ -177,7 +141,7 @@ public abstract class BaseDecorActivity<P extends Presenter> extends NucleusRxAp
 
     @Override
     public void onBackPressed() {
-        mSwipeBackHelper.swipeBackward();
+        super.onBackPressed();
     }
 
     /**
@@ -299,13 +263,7 @@ public abstract class BaseDecorActivity<P extends Presenter> extends NucleusRxAp
 
     @Override
     public void setTitle(CharSequence title) {
-        if (getTopBarType() == TopBarType.None) {
-            super.setTitle(title);
-        } else if (getTopBarType() == TopBarType.TitleBar) {
-            mTitleBar.setTitleText(title);
-        } else if (getTopBarType() == TopBarType.Toolbar) {
-            getSupportActionBar().setTitle(title);
-        }
+        mTitleBarLayout.setTitle(title);
     }
 
     @Override

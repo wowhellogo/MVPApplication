@@ -9,5 +9,5 @@ package com.hao.common.base;
 
 
 public enum TopBarType {
-    None, TitleBar, Toolbar
+    None, TitleBar, ToolBar
 }

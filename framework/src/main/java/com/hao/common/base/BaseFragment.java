@@ -128,7 +128,7 @@ public abstract class BaseFragment<P extends Presenter> extends NucleusRxFragmen
             mContentView = LayoutInflater.from(getActivity()).inflate(getRootLayoutResID(), null);
         } else if (getTopBarType() == TopBarType.TitleBar) {
             initTitleBarContentView();
-        } else if (getTopBarType() == TopBarType.Toolbar) {
+        } else if (getTopBarType() == TopBarType.ToolBar) {
             initToolbarContentView();
         }
     }
@@ -260,7 +260,7 @@ public abstract class BaseFragment<P extends Presenter> extends NucleusRxFragmen
     public void setTitle(CharSequence title) {
         if (getTopBarType() == TopBarType.TitleBar) {
             mTitleBar.setTitleText(title);
-        } else if (getTopBarType() == TopBarType.Toolbar) {
+        } else if (getTopBarType() == TopBarType.ToolBar) {
             mToolbar.setTitle(title);
         }
     }

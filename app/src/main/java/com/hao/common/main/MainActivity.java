@@ -1,13 +1,17 @@
 package com.hao.common.main;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import com.hao.common.base.BaseActivity;
+import com.hao.common.base.BaseDecorActivity;
 import com.hao.common.base.TopBarType;
 import com.hao.common.nucleus.factory.RequiresPresenter;
 
 
 @RequiresPresenter(MainPresenter.class)
-public class MainActivity extends BaseActivity<MainPresenter> implements IMainContract.IView {
+public class MainActivity extends BaseDecorActivity<MainPresenter> implements IMainContract.IView {
     @Override
     protected int getRootLayoutResID() {
         return R.layout.activity_main;
@@ -34,12 +38,18 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainCo
     }
 
     @Override
+    protected TopBarType getTopBarType() {
+        return TopBarType.ToolBar;
+    }
+
+    @Override
     protected void setListener() {
 
     }
 
     public void onText(View view) {
-        mSwipeBackHelper.forward(MyActivity.class);
+        Intent intent = new Intent(this, Main2Activity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -52,9 +62,5 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainCo
         finish();
     }
 
-    @Override
-    protected TopBarType getTopBarType() {
-        return TopBarType.Toolbar;
-    }
 
 }
